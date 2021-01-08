@@ -1,3 +1,6 @@
+from datetime import datetime           # Şu anki zamanı kullanabilmek için datetime modülünü import ettik.  
+instanceTime = datetime.now()
+
 class SilahliKuvvetler(object):  
     "This class represents Silahlı Kuvvetler and it's the parent class.-Oğuz-"
     
@@ -13,9 +16,8 @@ class SilahliKuvvetler(object):
         
 
     def IsRetired(self):  
-        from datetime import datetime           # Anlık seneyi kullanabilmek için datetime modülünü import ettik.  
-        instanceTime = datetime.now()           # (init’e almadık ki sürekli import etmeyip  
-                                                # gerektiği zamanlarda import etsin, performansta düşüklük yaşamayalım.)  
+        "This function returns boolean value in order to retiring"
+        
         if (instanceTime.year - self.yearOfStart) > 45:  
             return True                         # If it's achieved to condition we retire them  
         else:  
@@ -28,14 +30,15 @@ class Jet(SilahliKuvvetler):
     
     def __init__(self,name,yearOfStart):                   
         SilahliKuvvetler.__init__(self, name, yearOfStart)        # This line is for use the super class's(SilahlıKuvvetler) init module   
-        print("-"*20)
-        print("İstikbal Göklerdedir !")
+        print("-"*20)                                             
+        print("İstikbal Göklerdedir !")                           # Citation from Atatürk, signifies the importance of aviation
         print("-"*20)
         
   
     def LoadOn(self,bomb=0):  
         self.bomb = bomb
-        if self.bomb == 0:
+        
+        if (self.bomb == 0):
             print(self.name, "hasn't got any bomb.")  
         else:
             print(self.name, "has loaded with", self.bomb,"tons bomb.")
@@ -44,7 +47,7 @@ class Jet(SilahliKuvvetler):
     def TakeOff(self, adress, bomb2drop=0):  
         self.bomb2drop = bomb2drop                                                          # with tonnes  
         self.adress = adress        
-        if self.bomb2drop == 0:
+        if (self.bomb2drop == 0):
             print(self.adress,"has just visited by",self.name,".")
         else:                                                       # city or region  
             print(self.name,"has bombed:",self.adress,", with:", self.bomb2drop,"tons bombs.")  # informing the user
@@ -52,9 +55,6 @@ class Jet(SilahliKuvvetler):
 
     def IsRetired(self):                                         # We override Isretired here
                                                                  # because jets've more bench life
-        from datetime import datetime
-        instanceTime = datetime.now()
-
         if (instanceTime.year - self.yearOfStart) > 55:  
             return True                                         # If it's achieved to condition we retire them   
         else:  
@@ -134,9 +134,8 @@ class Personel(SilahliKuvvetler):
    
     def degree(self):
         "This function calculates the degree of soldiers according to the time spent in the profession."
-        from datetime import datetime       #We will use the current year to calculate the time soldiers have worked.                
-        Date = datetime.now()               #After finding today's date, we will use the "year" method to use the year.
-        x = Date.year - self.yearOfStart    #With x, we calculate the time the soldier worked.
+        
+        x = instanceTime.year - self.yearOfStart    #With x, we calculate the time the soldier worked.
 
         #We determine the degree of the members of the army who do their military service professionally according to the time required to obtain
         #their degree.
@@ -253,9 +252,7 @@ class Tanklar(SilahliKuvvetler):
     def time2repair(self):
         "tankın bakımının ne zaman yapılması gerektiği ile ilgili bilgiyi yazdırır." 
         
-        from datetime import datetime                   #içinde bulunulan seneyi kullanabilmek için datetime modülü import ettik.
-        date=datetime.now()
-        year=date.year                                  #Biz yalnızca yıl ile ilgilendiğimiz için yıl year fonksiyonu ile içinde bulunduğumuz yıl bilgisini çektik.
+        year = instanceTime.year                                  #Biz yalnızca yıl ile ilgilendiğimiz için yıl year fonksiyonu ile içinde bulunduğumuz yıl bilgisini çektik.
  
         if (year-self.yearOfStart)%5==0:
             #Tankların bakımı 5 yılda bir yapılmalıdır.
